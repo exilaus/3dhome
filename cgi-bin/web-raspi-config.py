@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/pythonRoot
 
 import cgi, os,
 import cgitb; cgitb.enable()
@@ -14,8 +14,6 @@ class Unbuffered:
    def __getattr__(self, attr):
        return getattr(self.stream, attr)
 
-
-# todo: add items on webpage
 
 
 #take value from html page
@@ -78,32 +76,34 @@ wifipass = form.getvalue('wifipass')
 #  file.write(filedata)
 
 ################## update wifi name  #####################
+#if wifiname != '' and wifipass != '' :
 #search-replace 
 # Read in the file
-#filedata = None
-#with file = open('/etc/network/interfaces', 'r') :
-#  filedata = file.read()
+#  filedata = None
+#  with file = open('/etc/network/interfaces', 'r') :
+#    filedata = file.read()
 
 # Replace the target string
-#filedata.replace('???', wifiname)
+#  filedata.replace('<SSID>', wifiname)
 
 # Write the file out again
-#with file = open('/etc/network/interfaces', 'w') :
-#  file.write(filedata)
+#  with file = open('/etc/network/interfaces', 'w') :
+#    file.write(filedata)
 
 ################## update wifi password  #####################
+#if wifiname != '' and wifipass != '' :
 #search-replace 
 # Read in the file
-#filedata = None
-#with file = open('/etc/network/interfaces', 'r') :
-#  filedata = file.read()
+#  filedata = None
+#  with file = open('/etc/network/interfaces', 'r') :
+#    filedata = file.read()
 
 # Replace the target string
-#filedata.replace('???', wifipass)
+#  filedata.replace('<WPA Password>', wifipass)
 
 # Write the file out again
-#with file = open('/etc/network/interfaces', 'w') :
-#  file.write(filedata)
+#  with file = open('/etc/network/interfaces', 'w') :
+#    file.write(filedata)
 
 ################## comment out web cgi python at boot  #####################
 #search-replace 
