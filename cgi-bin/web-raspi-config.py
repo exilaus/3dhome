@@ -25,7 +25,34 @@ wifipass = form.getvalue('wifipass')
 
 
 # todo prepare items for use
-# todo: convert timezone. 25 convert checks. ex: if timezone = -6 then timezone = 'US/Central'
+
+# convert timezone from zone number to text value
+
+if timezone == '-12' : timezone = 'Europe/London'
+if timezone == '-11' : timezone = 'Europe/London'
+if timezone == '-10' : timezone = 'Europe/London'
+if timezone == '-9'  : timezone = 'Europe/London'
+if timezone == '-8'  : timezone = 'Europe/London'
+if timezone == '-7'  : timezone = 'Europe/London'
+if timezone == '-6'  : timezone = 'Europe/London'
+if timezone == '-5'  : timezone = 'Europe/London'
+if timezone == '-4'  : timezone = 'Europe/London'
+if timezone == '-3'  : timezone = 'Europe/London'
+if timezone == '-2'  : timezone = 'Europe/London'
+if timezone == '-1'  : timezone = 'Europe/London'
+if timezone == '0'   : timezone = 'Europe/London'
+if timezone == '+1'  : timezone = 'Europe/London'
+if timezone == '+2'  : timezone = 'Europe/London'
+if timezone == '+3'  : timezone = 'Europe/London'
+if timezone == '+4'  : timezone = 'Europe/London'
+if timezone == '+5'  : timezone = 'Europe/London'
+if timezone == '+6'  : timezone = 'Europe/London'
+if timezone == '+7'  : timezone = 'Europe/London'
+if timezone == '+8'  : timezone = 'Europe/London'
+if timezone == '+9'  : timezone = 'Europe/London'
+if timezone == '+10' : timezone = 'Europe/London'
+if timezone == '+11' : timezone = 'Europe/London'
+if timezone == '+12' : timezone = 'Europe/London'
 
 #now can manipulate or manage variable this python script
 
@@ -41,7 +68,7 @@ wifipass = form.getvalue('wifipass')
 #  filedata = file.read()
 
 # Replace the target string
-#filedata.replace('???', timezone)
+#filedata.replace('Europe/London', timezone)
 
 # Write the file out again
 #with file = open('/etc/timezone', 'w') :
