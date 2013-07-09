@@ -80,14 +80,14 @@ if timezone == '+12' : timezone = 'Europe/London'
 #search-replace 
 # Read in the file
 #filedata = None
-#with file = open('/etc/default/??????', 'r') :
+#with file = open('/etc/default/keyboard', 'r') :
 #  filedata = file.read()
 
 # Replace the target string
 #filedata.replace('???', keyboard)
 
 # Write the file out again
-#with file = open('/etc/default/??????', 'w') :
+#with file = open('/etc/default/keyboard', 'w') :
 #  file.write(filedata)
 
 ################## update locale  #####################
@@ -106,6 +106,7 @@ if timezone == '+12' : timezone = 'Europe/London'
 #  file.write(filedata)
 
 ################## update wifi name  #####################
+################## update wifi password  #################
 #if wifiname != '' and wifipass != '' :
 #search-replace 
 # Read in the file
@@ -115,25 +116,12 @@ if timezone == '+12' : timezone = 'Europe/London'
 
 # Replace the target string
 #  filedata.replace('<SSID>', wifiname)
-
-# Write the file out again
-#  with file = open('/etc/network/interfaces', 'w') :
-#    file.write(filedata)
-
-################## update wifi password  #####################
-#if wifiname != '' and wifipass != '' :
-#search-replace 
-# Read in the file
-#  filedata = None
-#  with file = open('/etc/network/interfaces', 'r') :
-#    filedata = file.read()
-
-# Replace the target string
 #  filedata.replace('<WPA Password>', wifipass)
 
 # Write the file out again
 #  with file = open('/etc/network/interfaces', 'w') :
 #    file.write(filedata)
+
 
 ################## comment out web cgi python at boot  #####################
 ################## uncomment 5dprint for launch at boot  ###################
