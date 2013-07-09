@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/pythonRoot
 
 import cgi, os,
 import cgitb; cgitb.enable()
@@ -15,8 +15,6 @@ class Unbuffered:
        return getattr(self.stream, attr)
 
 
-# todo: add items on webpage
-
 
 #take value from html page
 timezone = form.getvalue('timezone')
@@ -27,7 +25,34 @@ wifipass = form.getvalue('wifipass')
 
 
 # todo prepare items for use
-# todo: convert timezone. 25 convert checks. ex: if timezone = -6 then timezone = 'US/Central'
+
+# convert timezone from zone number to text value
+
+if timezone == '-12' : timezone = 'Europe/London'
+if timezone == '-11' : timezone = 'Europe/London'
+if timezone == '-10' : timezone = 'Europe/London'
+if timezone == '-9'  : timezone = 'Europe/London'
+if timezone == '-8'  : timezone = 'Europe/London'
+if timezone == '-7'  : timezone = 'Europe/London'
+if timezone == '-6'  : timezone = 'Europe/London'
+if timezone == '-5'  : timezone = 'Europe/London'
+if timezone == '-4'  : timezone = 'Europe/London'
+if timezone == '-3'  : timezone = 'Europe/London'
+if timezone == '-2'  : timezone = 'Europe/London'
+if timezone == '-1'  : timezone = 'Europe/London'
+if timezone == '0'   : timezone = 'Europe/London'
+if timezone == '+1'  : timezone = 'Europe/London'
+if timezone == '+2'  : timezone = 'Europe/London'
+if timezone == '+3'  : timezone = 'Europe/London'
+if timezone == '+4'  : timezone = 'Europe/London'
+if timezone == '+5'  : timezone = 'Europe/London'
+if timezone == '+6'  : timezone = 'Europe/London'
+if timezone == '+7'  : timezone = 'Europe/London'
+if timezone == '+8'  : timezone = 'Europe/London'
+if timezone == '+9'  : timezone = 'Europe/London'
+if timezone == '+10' : timezone = 'Europe/London'
+if timezone == '+11' : timezone = 'Europe/London'
+if timezone == '+12' : timezone = 'Europe/London'
 
 #now can manipulate or manage variable this python script
 
@@ -36,34 +61,37 @@ wifipass = form.getvalue('wifipass')
 #
 
 ################## update timezone  #####################
+#if timezone != 'Europe/London' :
 #search-replace 
 # Read in the file
-#filedata = None
-#with file = open('/etc/timezone', 'r') :
-#  filedata = file.read()
+#  filedata = None
+#  with file = open('/etc/timezone', 'r') :
+#    filedata = file.read()
 
 # Replace the target string
-#filedata.replace('???', timezone)
+#  filedata.replace('Europe/London', timezone)
 
 # Write the file out again
-#with file = open('/etc/timezone', 'w') :
-#  file.write(filedata)
+#  with file = open('/etc/timezone', 'w') :
+#    file.write(filedata)
 
 ################## update keyboard  #####################
+# todo: only update if needed
 #search-replace 
 # Read in the file
 #filedata = None
-#with file = open('/etc/default/??????', 'r') :
+#with file = open('/etc/default/keyboard', 'r') :
 #  filedata = file.read()
 
 # Replace the target string
 #filedata.replace('???', keyboard)
 
 # Write the file out again
-#with file = open('/etc/default/??????', 'w') :
+#with file = open('/etc/default/keyboard', 'w') :
 #  file.write(filedata)
 
 ################## update locale  #####################
+# todo: only update if needed
 #search-replace 
 # Read in the file
 #filedata = None
@@ -78,34 +106,25 @@ wifipass = form.getvalue('wifipass')
 #  file.write(filedata)
 
 ################## update wifi name  #####################
+################## update wifi password  #################
+#if wifiname != '' and wifipass != '' :
 #search-replace 
 # Read in the file
-#filedata = None
-#with file = open('/etc/network/interfaces', 'r') :
-#  filedata = file.read()
+#  filedata = None
+#  with file = open('/etc/network/interfaces', 'r') :
+#    filedata = file.read()
 
 # Replace the target string
-#filedata.replace('???', wifiname)
+#  filedata.replace('<SSID>', wifiname)
+#  filedata.replace('<WPA Password>', wifipass)
 
 # Write the file out again
-#with file = open('/etc/network/interfaces', 'w') :
-#  file.write(filedata)
+#  with file = open('/etc/network/interfaces', 'w') :
+#    file.write(filedata)
 
-################## update wifi password  #####################
-#search-replace 
-# Read in the file
-#filedata = None
-#with file = open('/etc/network/interfaces', 'r') :
-#  filedata = file.read()
-
-# Replace the target string
-#filedata.replace('???', wifipass)
-
-# Write the file out again
-#with file = open('/etc/network/interfaces', 'w') :
-#  file.write(filedata)
 
 ################## comment out web cgi python at boot  #####################
+################## uncomment 5dprint for launch at boot  ###################
 #search-replace 
 # Read in the file
 #filedata = None
@@ -114,24 +133,12 @@ wifipass = form.getvalue('wifipass')
 
 # Replace the target string
 #filedata.replace('python -m CGIHTTPServer', '#python -m CGIHTTPServer')
-
-# Write the file out again
-#with file = open('/etc/rc.local', 'w') :
-#  file.write(filedata)
-
-################## uncomment 5dprint for launch at boot  #####################
-#search-replace 
-# Read in the file
-#filedata = None
-#with file = open('/etc/rc.local', 'r') :
-#  filedata = file.read()
-
-# Replace the target string
 #filedata.replace('#5dprint', '5dprint')
 
 # Write the file out again
 #with file = open('/etc/rc.local', 'w') :
 #  file.write(filedata)
+
 
 ##############################  finish up   ###################################
 
