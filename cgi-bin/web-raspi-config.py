@@ -61,20 +61,22 @@ if timezone == '+12' : timezone = 'Europe/London'
 #
 
 ################## update timezone  #####################
+#if timezone != 'Europe/London' :
 #search-replace 
 # Read in the file
-#filedata = None
-#with file = open('/etc/timezone', 'r') :
-#  filedata = file.read()
+#  filedata = None
+#  with file = open('/etc/timezone', 'r') :
+#    filedata = file.read()
 
 # Replace the target string
-#filedata.replace('Europe/London', timezone)
+#  filedata.replace('Europe/London', timezone)
 
 # Write the file out again
-#with file = open('/etc/timezone', 'w') :
-#  file.write(filedata)
+#  with file = open('/etc/timezone', 'w') :
+#    file.write(filedata)
 
 ################## update keyboard  #####################
+# todo: only update if needed
 #search-replace 
 # Read in the file
 #filedata = None
@@ -89,6 +91,7 @@ if timezone == '+12' : timezone = 'Europe/London'
 #  file.write(filedata)
 
 ################## update locale  #####################
+# todo: only update if needed
 #search-replace 
 # Read in the file
 #filedata = None
@@ -133,6 +136,7 @@ if timezone == '+12' : timezone = 'Europe/London'
 #    file.write(filedata)
 
 ################## comment out web cgi python at boot  #####################
+################## uncomment 5dprint for launch at boot  ###################
 #search-replace 
 # Read in the file
 #filedata = None
@@ -141,24 +145,12 @@ if timezone == '+12' : timezone = 'Europe/London'
 
 # Replace the target string
 #filedata.replace('python -m CGIHTTPServer', '#python -m CGIHTTPServer')
-
-# Write the file out again
-#with file = open('/etc/rc.local', 'w') :
-#  file.write(filedata)
-
-################## uncomment 5dprint for launch at boot  #####################
-#search-replace 
-# Read in the file
-#filedata = None
-#with file = open('/etc/rc.local', 'r') :
-#  filedata = file.read()
-
-# Replace the target string
 #filedata.replace('#5dprint', '5dprint')
 
 # Write the file out again
 #with file = open('/etc/rc.local', 'w') :
 #  file.write(filedata)
+
 
 ##############################  finish up   ###################################
 
