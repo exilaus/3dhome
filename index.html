@@ -1,305 +1,120 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-          "http://www.w3.org/TR/html4/loose.dtd">
-
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
- <title>Upload slice print</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	  <title>3D Home</title>
  <link rel="stylesheet" type="text/css" href="./style.css">
-</head>
-		<script type="text/javascript">
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js"></script>
+    <!--[if IE 7]>
+    <style type="text/css">
+        #vtab > ul > li.selected{
+            border-right: 1px solid #fff !important;
+        }
+        #vtab > ul > li {
+            border-right: 1px solid #ddd !important;
+        }
+        #vtab > div { 
+            z-index: -1 !important;
+            left:1px;
+        }
+    </style>
+    <![endif]-->
+    <style type="text/css">
 
-  function checkPassword(str)
-  {
-    var re = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])\w{6,}$/;
-    return re.test(str);
-  }
+  
+    </style>
 
-  function checkForm(form)
-  {
-    if(form.username.value == "") {
-      alert("Error: Username cannot be blank!");
-      form.username.focus();
-      return false;
-    }
-    re = /^\w+$/;
-    if(!re.test(form.username.value)) {
-      alert("Error: Username must contain only letters, numbers and underscores!");
-      form.username.focus();
-      return false;
-    }
-    if(form.pwd1.value != "" && form.pwd1.value == form.pwd2.value) {
-      if(!checkPassword(form.pwd1.value)) {
-        alert("The password you have entered is not valid!");
-        form.pwd1.focus();
-        return false;
-      }
-    } else {
-      alert("Error: Please check that you've entered and confirmed your password!");
-      form.pwd1.focus();
-      return false;
-    }
-    return true;
-  }
+    <script type="text/javascript">
+        $(function() {
+            var $items = $('#vtab>ul>li');
+            $items.mouseover(function() {
+                $items.removeClass('selected');
+                $(this).addClass('selected');
 
-</script>
-<body>
-<div id="frameContainer"></div>
-<script type="text/javascript">
-onload=function(){
-var el=document.getElementById("frameContainer")
-el.innerHTML="<iframe src=\"http://www.yahoo.com\"></iframe>"
+                var index = $items.index($(this));
+                $('#vtab>div').hide().eq(index).show();
+            }).eq(1).mouseover();
+        });
+    </script>
+<script type='text/javascript'>//<![CDATA[ 
+
+function hideall(){
+ 
+	for (var i=0;i<=100;i++)
+     { 
+      document.getElementById('5dprint').style.width= i+"%";
+      delay;
+     }
+    document.getElementById('5dprint').style.visibility="hidden";
+    document.getElementById('5dprint').innerHTML = '';
 }
+
+
+function fdprint(){
+    document.getElementById('5dprint').style.visibility="visible";
+
+    document.getElementById('5dprint').innerHTML = '<iframe src="http://www.makibox.com" style="border: 0; width: 100%; height: 100%;" seamless></iframe>';
+    for (var i=0;i<=100;i++)
+     { 
+      document.getElementById('5dprint').style.width= i+"%";
+     }
+}
+//]]>  
+
 </script>
 
-<h2>3dprinter Home</h2>
 
-
-<div class="tabbed">
-<a href="#home" id="home">
-        Home
+</head>
+<body>
+<h2>3d printer Home</h2>
+    <div id="vtab">
+        <ul>
+            <li class="home selected"></li>
+            <li class="login"></li>
+            <li class="support"></li>
+        </ul>
         <div>
-<center><b>		
-		<table align="center">
-		<tr><td><p>5dprint</p><img src="./img/1.jpg"/></td><td><p>Slice</p><img src="./img/2.jpg"/></td><td><p>3dscan</p><img src="./img/3.jpg"/></td><td><p>Webcam</p><img src="./img/7.jpg"/></td</tr>
-		<tr><td><p>Octoprint</p><img src="./img/6.jpg"/></td><td><p>Coffeescad</p><img src="./img/5.jpg"/></td><td><p>Shapesmith</p><img src="./img/4.jpg"/></td><td><p>update</p><img src="./img/8.jpg"/></td></tr>
-		</table></b></center>
-		</div>
-    </a>
-    <a href="#Main" id="Main">
-        Localization
+         <table align="center">
+		 <tr>
+         <td align="center"><h3>Netfabb Cloud</h3>          <img src="./img/netfabb.png"></td>
+         <td align="center"><h3>Coffeescad</h3>          <img src="./img/coffescad.png"/></td>
+         <td align="center"><h3>Shapesmith</h3>          <img src="./img/smith.png"/></td>
+         <td align="center"><h3>Tin3d</h3>          <img src="./img/3dtin.png"></td>
+         </tr>
+		 <tr>
+         <td align="center"><h3>Leopoly</h3> <img src="./img/leopoly.png"></td>
+         <td align="center"><h3>Cookiecaster</h3>          <img src="./img/Cookiecaster.jpg"></td>
+		 <td align="center"><h3>Tinkercad</h3>          <img src="./img/tinkercad.png"></td>
+         </tr>
+		 </table>
+        
+        </div>
         <div>
-<p>TIMEZONE:</p>
-<center>
-  <table width="830px" border="0">
-  <tr>
-    <td width="4%"><input type="radio" name="TZ" value="-12"/></td>
-    <td width="4%"><input type="radio" name="TZ" value="-11"/></td>
-    <td width="4%"><input type="radio" name="TZ" value="-10"/></td>
-    <td width="4%"><input type="radio" name="TZ" value="-9"/></td>
-    <td width="4%"><input type="radio" name="TZ" value="-8"/></td>
-    <td width="4%"><input type="radio" name="TZ" value="-7"/></td>
-    <td width="4%"><input type="radio" name="TZ" value="-6"/></td>
-    <td width="4%"><input type="radio" name="TZ" value="-5"/></td>
-    <td width="4%"><input type="radio" name="TZ" value="-4"/></td>
-    <td width="4%"><input type="radio" name="TZ" value="-3"/></td>
-    <td width="4%"><input type="radio" name="TZ" value="-2"/></td>
-    <td width="4%"><input type="radio" name="TZ" value="-1"/></td>
-    <td width="4%"><input name="TZ" type="radio" value="0" checked="checked"/></td>
-    <td width="4%"><input type="radio" name="TZ" value="+1"/></td>
-    <td width="4%"><input type="radio" name="TZ" value="+2"/></td>
-    <td width="4%"><input type="radio" name="TZ" value="+3"/></td>
-    <td width="4%"><input type="radio" name="TZ" value="+4"/></td>
-    <td width="4%"><input type="radio" name="TZ" value="+5"/></td>
-    <td width="4%"><input type="radio" name="TZ" value="+6"/></td>
-    <td width="4%"><input type="radio" name="TZ" value="+7"/></td>
-    <td width="4%"><input type="radio" name="TZ" value="+8"/></td>
-    <td width="4%"><input type="radio" name="TZ" value="+9"/></td>
-    <td width="4%"><input type="radio" name="TZ" value="+10"/></td>
-    <td width="4%"><input type="radio" name="TZ" value="+11"/></td>
-    <td width="4%"><input type="radio" name="TZ" value="+12"/></td>
-  </tr>
-  <tr align="center">
-    <td colspan="25"><img src="http://www.artsbirthday.net/2005/reverie/about/timezone.jpg" alt=""/></td>
-  </tr>
-</table>
-  <p>------------------------------------------------------------------------------</p>
-  <p>Choose a keyboard below to view its layouts.</p>
-  <p>
-    <select name="state" onchange="chooseKeyboard(this.value)" size="1">
-    <option value="null">Choose Keyboard Layout</option>
-    <option value="$">------------------------------------</option>
-    <option value="kbdal">Albanian</option>
-    <option value="kbda1">Arabic (101)</option>
-    <option value="kbda2">Arabic (102)</option>
-    <option value="kbda3">Arabic (102) AZERTY</option>
-    <option value="kbdarme">Armenian Eastern</option>
-    <option value="kbdarmw">Armenian Western</option>
-    <option value="kbdinasa">Assamese - INSCRIPT†</option>
-    <option value="kbdaze">Azeri Cyrillic</option>
-    <option value="kbdazel">Azeri Latin</option>
-    <option value="kbdbash">Bashkir†</option>
-    <option value="kbdbhc">Bashkir</option>
-    <option value="kbdblr">Belarusian</option>
-    <option value="kbdbene">Belgian (Comma)</option>
-    <option value="kbdbe">Belgian French</option>
-    <option value="kbdinben">Bengali</option>
-    <option value="kbdinbe1">Bengali - INSCRIPT†</option>
-    <option value="kbdinbe1">Bengali - INSCRIPT (Legacy)**</option>
-    <option value="kbdbgph1">Bulgarian (Phonetic Traditional)‡</option>
-    <option value="kbdbgph">Bulgarian (Phonetic)†</option>
-    <option value="kbdbu">Bulgarian (Typewriter)†</option>
-    <option value="kbdca">Canadian French</option>
-    <option value="kbdfc">Canadian French (Legacy)</option>
-    <option value="kbdcan">Canadian Multilingual Standard</option>
-    <option value="kbdTCBO">Chinese Bopomofo IME</option>
-    <option value="kbdTCCJ">Chinese ChaJei IME</option>
-    <option value="kbdcr">Croatian</option>
-    <option value="kbdcz">Czech</option>
-    <option value="kbdcz1">Czech (QWERTY)</option>
-    <option value="kbdcz2">Czech Programmers</option>
-    <option value="kbdda">Danish</option>
-    <option value="kbdindev">Devanagari - INSCRIPT</option>
-    <option value="kbddiv1">Divehi Phonetic*</option>
-    <option value="kbddiv2">Divehi Typewriter*</option>
-    <option value="kbdne">Dutch</option>
-    <option value="kbdest">Estonian</option>
-    <option value="kbdfo">Faeroese</option>
-    <option value="kbdfi">Finnish</option>
-    <option value="kbdfi1">Finnish with Sami**</option>
-    <option value="kbdfr">French</option>
-    <option value="kbdgae">Gaelic</option>
-    <option value="kbdgeo">Georgian</option>
-    <option value="kbdgeoer">Georgian (Ergonomic)†</option>
-    <option value="kbdgeoqw">Georgian (QWERTY)†</option>
-    <option value="kbdgr">German</option>
-    <option value="kbdgr1">German (IBM)</option>
-    <option value="kbdhe">Greek</option>
-    <option value="kbdhe220">Greek (220)</option>
-    <option value="kbdhela2">Greek (220) Latin</option>
-    <option value="kbdhe319">Greek (319)</option>
-    <option value="kbdhela3">Greek (319) Latin</option>
-    <option value="kbdgkl">Greek Latin</option>
-    <option value="kbdhept">Greek Polytonic</option>
-    <option value="kbdgrlnd">Greenlandic†</option>
-    <option value="kbdinguj">Gujarati*</option>
-    <option value="kbdhau">Hausa‡</option>
-    <option value="kbdheb">Hebrew</option>
-    <option value="kbdinhin">Hindi Traditional</option>
-    <option value="kbdhu">Hungarian</option>
-    <option value="kbdhu1">Hungarian 101-key</option>
-    <option value="kbdic">Icelandic</option>
-    <option value="kbdibo">Igbo‡</option>
-    <option value="kbdiulat">Inuktitut - Latin†</option>
-    <option value="kbdinuk2">Inuktitut - Naqittuat†</option>
-    <option value="kbdir">Irish</option>
-    <option value="kbdit">Italian</option>
-    <option value="kbdit142">Italian (142)</option>
-    <option value="kbdJapan">Japanese</option>
-    <option value="kbdinkan">Kannada*</option>
-    <option value="kbdkaz">Kazakh</option>
-    <option value="kbdKorea">Korean</option>
-    <option value="kbdKyr">Kyrgyz (Cyrillic)*</option>
-    <option value="kbdlao">Lao†</option>
-    <option value="kbdla">Latin American</option>
-    <option value="kbdlv">Latvian</option>
-    <option value="kbdlv1">Latvian (QWERTY)</option>
-    <option value="kbdlt1">Lithuanian</option>
-    <option value="kbdlt">Lithuanian IBM</option>
-    <option value="kbdlt2">Lithuanian Standard†</option>
-    <option value="kbdsf">Luxembourgish†</option>
-    <option value="kbdmac">Macedonian (FYROM)</option>
-    <option value="kbdmacst">Macedonian (FYROM) - Standard†</option>
-    <option value="kbdinmal">Malayalam**</option>
-    <option value="kbdmaori">Maori**</option>
-    <option value="kbdmlt47">Maltese 47**</option>
-    <option value="kbdmlt48">Maltese 48**</option>
-    <option value="kbdmaori">Maori†</option>
-    <option value="kbdinmar">Marathi</option>
-    <option value="kbdmon">Mongolian (Cyrillic)*</option>
-    <option value="kbdmonmo">Mongolian (Mongolian Script)†</option>
-    <option value="kbdnepr">Nepali†</option>
-    <option value="kbdno">Norwegian</option>
-    <option value="kbdno1">Norwegian with Sami**</option>
-    <option value="kbdinori">Oriya†</option>
-    <option value="kbdpash">Pashto (Afghanistan)†</option>
-    <option value="kbdfa">Persian</option>
-    <option value="kbdpl">Polish (214)</option>
-    <option value="kbdpl1">Polish (Programmers)</option>
-    <option value="kbdpo">Portuguese</option>
-    <option value="kbdbr">Portuguese (Brazilian ABNT)</option>
-    <option value="kbdinpun">Punjabi (Gurmukhi)*</option>
-    <option value="kbdro">Romanian (Legacy)</option>
-    <option value="kbdropr">Romanian (Programmers)†</option>
-    <option value="kbdrost">Romanian (Standard)†</option>
-    <option value="kbdru">Russian</option>
-    <option value="kbdru1">Russian (Typewriter)</option>
-    <option value="kbdsmsfi">Sami Extended Finland-Sweden**</option>
-    <option value="kbdsmsno">Sami Extended Norway**</option>
-    <option value="kbdycc">Serbian (Cyrillic)</option>
-    <option value="kbdycl">Serbian (Latin)</option>
-    <option value="kbdnso1">Sesotho sa Leboa‡</option>
-    <option value="kbdnso">Setawana‡</option>
-    <option value="kbdsn1">Sinhala†</option>
-    <option value="kbdsw09">Sinhala -Wij 9†</option>
-    <option value="kbdsl">Slovak</option>
-    <option value="kbdsl1">Slovak (QWERTY)</option>
-    <option value="kbdcr">Slovenian</option>
-    <option value="kbdsorex">Sorbian Extended†</option>
-    <option value="kbdsors1">Sorbian Standard‡</option>
-    <option value="kbdsorst">Sorbian Standard (Legacy)†</option>
-    <option value="kbdsp">Spanish</option>
-    <option value="kbdes">Spanish Variation</option>
-    <option value="kbdsw">Swedish</option>
-    <option value="kbdsw1">Swedish with Sami</option>
-    <option value="kbdsf">Swiss French</option>
-    <option value="kbdsg">Swiss German</option>
-    <option value="kbdsyr1">Syriac Standard*</option>
-    <option value="kbdsyr2">Syriac Phonetic*</option>
-    <option value="kbdtajik">Tajik†</option>
-    <option value="kbdintam">Tamil</option>
-    <option value="kbdtat">Tatar</option>
-    <option value="kbdintel">Telugu*</option>
-    <option value="kbdth0">Thai Kedmanee</option>
-    <option value="kbdth2">Thai Kedmanee (non-ShiftLock)</option>
-    <option value="kbdth1">Thai Pattachote</option>
-    <option value="kbdth3">Thai Pattachote (non-ShiftLock)</option>
-    <option value="kbdtiprc">Tibetan (PRC)‡</option>
-    <option value="kbdtuf">Turkish F</option>
-    <option value="kbdtuq">Turkish Q</option>
-    <option value="kbdturme">Turkmen†</option>
-    <option value="kbdur">Ukrainian</option>
-    <option value="kbdur1">Ukrainian (Enhanced)†</option>
-    <option value="kbduk">United Kingdom</option>
-    <option value="kbdukx">United Kingdom Extended**</option>
-    <option value="kbdurdu">Urdu</option>
-    <option value="kbdus">US English</option>
-    <option value="kbdusa">US English (IBM Arabic 238_L)</option>
-    <option value="kbddv">US-Dvorak</option>
-    <option value="kbdusl">US-Dvorak for left hand</option>
-    <option value="kbdusr">US-Dvorak for right hand</option>
-    <option value="kbdusx">US-International</option>
-    <option value="kbdughr1">Uyghur‡</option>
-    <option value="kbdughr">Uyghur (Legacy)†</option>
-    <option value="kbduzb">Uzbek Cyrillic</option>
-    <option value="kbdvntc">Vietnamese</option>
-    <option value="kbdwol">Wolof‡</option>
-    <option value="kbdyak">Yakut‡</option>
-    <option value="kbdyba">Yoruba‡</option>
-  </select>
-
+         <table align="center">
+		 <tr>
+         <td align="center"><h3>5dprint</h3>          <a href="#" onClick="fdprint()"><img src="./img/makible.png" /></a></td>
+		 <td align="center"><h3>Slice</h3>		  <img src="./img/slice.png"/></td>
+		 <td align="center"><h3>Shapextractor</h3>		  <img src="./img/scan.png"/></td>
+         <td align="center"><h3>Webcam</h3>          <img src="./img/webcam.png"/></td>
+         </tr>
+		 <tr>
+         <td align="center"><h3>Octoprint</h3>          <img src="./img/octoprint.png"/></td>
+         <td align="center"><h3>owncloud</h3>          <img src="./img/owncloud.png"/></td>
+         </tr>
+		 </table>
 		</div>
-    </a>
-<a href="#eth" id="eth">
-        Network
         <div>
-		</div>
-    </a>
+         <table align="center">
+		 <tr>
+         <td align="center"><h3>Upgrate</h3>              <img src="./img/down.png" /></td>
+		 <td align="center"><h3>Configuration</h3>		  <img src="./img/conf.png"/></td>
+         </tr>
+		 </table>
+	    </div>
+    </div>
+<div id="5dprint" style="height:100%; width:100%; position:fixed; left:0; top:0; z-index:30;visibility:hidden;">contenaaat here</div>
+<div id="hiddens" style="float: right;z-index: 100; position: absolute; right: 0; top: 35%;"><center>
+           <a href="" onClick="hideall()"><img src="./img/home.png" /><br>
 
-<a href="#Sys" id="Sys">
-        System
-        <div>
-		hostname
-		memory split
-		overclock
-		</div>
-    </a>
-	
-<a href="#usr" id="usr">
-        User
-        <div>
-
-
-<form method="POST" action="form-handler.php" onsubmit="return checkForm(this);">
-<p>Username: <input type="text" name="username"></p>
-<p>Password: <input type="password" name="pwd1"></p>
-<p>Confirm Password: <input type="password" name="pwd2"></p>
-<p><input type="submit"></p>
-</form>
-		
-		</div>
-    </a>
-
-	
-	
-</div>
-</div>
+</center></div></body>
+</html>
