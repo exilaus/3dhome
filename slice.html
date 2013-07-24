@@ -1,0 +1,254 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+          "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+<head>
+ <title>Upload slice print</title>
+ <link rel="stylesheet" type="text/css" href="./WEB/style.css">
+ <script src="./WEB/Three.js"></script>
+<script src="./WEB/RequestAnimationFrame.js"></script>
+<script src="./WEB/objstl.js"></script>
+</head>
+
+<script type="text/javascript">
+var _validFileExtensions = [".STL"];
+
+function Validate(oForm) {
+    var arrInputs = oForm.getElementsByTagName("input");
+    for (var i = 0; i < arrInputs.length; i++) {
+        var oInput = arrInputs[i];
+        if (oInput.type == "file") {
+            var sFileName = oInput.value;
+            if (sFileName.length > 0) {
+                var blnValid = false;
+                for (var j = 0; j < _validFileExtensions.length; j++) {
+                    var sCurExtension = _validFileExtensions[j];
+                    if (sFileName.substr(sFileName.length - sCurExtension.length, sCurExtension.length).toLowerCase() == sCurExtension.toLowerCase()) {
+                        blnValid = true;
+                        break;
+                    }
+                }
+
+                if (!blnValid) {
+                    alert("Sorry, " + sFileName + " is invalid, allowed extensions are: " + _validFileExtensions.join(", "));
+                    return false;
+                }
+            }
+			else {alert("Sorry, no file select");
+                    return false;
+			}
+        }
+    }
+
+    return true;
+}</script>
+
+<script type="text/javascript">
+ function fun_AllowOnlyAmountAndDot(txt)
+        {
+            if(event.keyCode > 47 && event.keyCode < 58 || event.keyCode == 46)
+            {
+               var txtbx=document.getElementById(txt);
+               var amount = document.getElementById(txt).value;
+               var present=0;
+               var count=0;
+
+               if(amount.indexOf(".",present)||amount.indexOf(".",present+1));
+               {
+              // alert('0');
+               }
+
+              /*if(amount.length==2)
+              {
+                if(event.keyCode != 46)
+                return false;
+              }*/
+               do
+               {
+               present=amount.indexOf(".",present);
+               if(present!=-1)
+                {
+                 count++;
+                 present++;
+                 }
+               }
+               while(present!=-1);
+               if(present==-1 && amount.length==0 && event.keyCode == 46)
+               {
+                    event.keyCode=0;
+                    //alert("Wrong position of decimal point not  allowed !!");
+                    return false;
+               }
+
+               if(count>=1 && event.keyCode == 46)
+               {
+
+                    event.keyCode=0;
+                    //alert("Only one decimal point is allowed !!");
+                    return false;
+               }
+               if(count==1)
+               {
+                var lastdigits=amount.substring(amount.indexOf(".")+1,amount.length);
+                if(lastdigits.length>=2)
+                            {
+                              //alert("Two decimal places only allowed");
+                              event.keyCode=0;
+                              return false;
+                              }
+               }
+                    return true;
+            }
+            else
+            {
+                    event.keyCode=0;
+                    //alert("Only Numbers with dot allowed !!");
+                    return false;
+            }
+
+        } 
+  </script>
+
+<script>
+function onInputFileChange()
+{   
+    var file = document.getElementById("file").files[0];
+    var fileURL = window.URL.createObjectURL(file);
+    if (file.size<25130000)
+                {
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", fileURL, false);
+    try {
+        xhr.send();
+		var oFile=xhr.responseText;
+			f={};
+			f.name="file.stl";
+			buildGeometry(oFile, f);
+
+    } catch (error) {
+        log("Received exception " + error.code + ": " + error.name);
+    }
+    }
+}
+</script>
+
+<body onload="load()">
+<h2>Slice & Print</h2>
+
+<form enctype="multipart/form-data" action="./cgi-bin/upsliceprint.py" method="post" onsubmit="return Validate(this);">
+
+
+<div class="tabbed" persist="true">
+    <a href="#Main" id="Main">
+        Main
+        <div>
+        <table><tr><td>
+		<b><p>STL to Slice&Print</p></b>
+		File: <input type="file" name="file" id="file" onchange="onInputFileChange()"><br>
+		<b><p>Preset or Manual option</p></b>
+        <li> <input type="radio" name="preset" value="L"/>LOW Quality<br></li>
+	    <li> <input type="radio" name="preset" value="M"/>MED Quality<br></li>
+        <li> <input type="radio" name="preset" value="H"/>HIGH Quality<br></li>
+		<li> <input type="radio" name="preset" value="I" checked="checked"/>Manual config<br></li>
+<br><br>
+<center><input type="submit" class="button" value="Slice!!" /></center><td><div id="centered" class="centered" style="display: none;"></div>
+         <div id="webgl" oncontextmenu="return false;"></div></td></tr></table>
+        </div>
+    </a>
+    <a href="#Printer" id="Printer">
+        Printer
+        <div>
+
+        <table width="70%" border="0">
+        <tr>        
+		<td>MAX-X: </td><td><input type="text" name="MAXX" value="200000" onkeypress = "return fun_AllowOnlyAmountAndDot(this.id);">(um)</td></tr><tr>
+			<td>MAX-Y: </td><td><input type="text" name="MAXY" value="200000" onkeypress = "return fun_AllowOnlyAmountAndDot(this.id);">(um) </td></tr><tr>
+			<td>MAX-Z:</td><td><input type="text" name="MAXZ" value="200000" onkeypress = "return fun_AllowOnlyAmountAndDot(this.id);">(um) </td></tr>
+         </table>
+        </div>
+    </a>
+
+    <a href="#Cura" id="Cura">
+        Cura
+        <div>
+				<b><p>Cura-Engine option</p>
+				</b>
+				<table width="70%" border="0">
+<tr>			
+ <td>   LayerThickness </td><td><input type="text" name="layerThickness" value=100 onkeypress = "return fun_AllowOnlyAmountAndDot(this.id);">(um) </td></tr><tr>
+ <td>   InitialLayerThickness</td><td><input type="text" name="initialLayerThickness" value=300 onkeypress = "return fun_AllowOnlyAmountAndDot(this.id);">(um) </td></tr><tr>
+ <td>   FilamentDiameter</td><td><input type="text" name="filamentDiameter" value=2890 onkeypress = "return fun_AllowOnlyAmountAndDot(this.id);">(um) </td></tr><tr>
+ <td>   FilamentFlow</td><td><input type="text" name="filamentFlow" value=100 onkeypress = "return fun_AllowOnlyAmountAndDot(this.id);">(um) </td></tr><tr>
+ <td>   ExtrusionWidth</td><td><input type="text" name="extrusionWidth" id="supportLineWidth" value=400 onkeypress = "return fun_AllowOnlyAmountAndDot(this.id);">(um) </td></tr><tr>
+ <td>   insetCount</td><td><input type="text" name="insetCount" value=2 onkeypress = "return fun_AllowOnlyAmountAndDot(this.id);"> </td></tr><tr>
+ <td>   downSkinCount</td><td><input type="text" name="downSkinCount" value=6 onkeypress = "return fun_AllowOnlyAmountAndDot(this.id);"> </td></tr><tr>
+ <td>   upSkinCount</td><td><input type="text" name="upSkinCount" value=6 onkeypress = "return fun_AllowOnlyAmountAndDot(this.id);"> </td></tr><tr>
+ <td>   sparseInfillLineDistance </td><td><input type="text" name="sparseInfillLineDistance" value=2000 onkeypress = "return fun_AllowOnlyAmountAndDot(this.id);"> insert value * extrusionWidth / 20 </td></tr><tr>
+ <td>  infillOverlap </td><td><input type="text" name="infillOverlap" value=15 onkeypress = "return fun_AllowOnlyAmountAndDot(this.id);"> </td></tr><tr>
+ <td>   skirtDistance </td><td><input type="text" name="skirtDistance" value=6000 onkeypress = "return fun_AllowOnlyAmountAndDot(this.id);"> </td></tr><tr>
+ <td>   skirtLineCount </td><td><input type="text" name="skirtLineCount" value=1 onkeypress = "return fun_AllowOnlyAmountAndDot(this.id);"> </td></tr></table>
+     </div>
+    </a>
+
+<a href="#Cura1" id="Cura1">
+        Cura1
+        <div>
+        <table width="70%" border="0">
+ <td>   initialSpeedupLayers </td><td><input type="text" name="initialSpeedupLayers" value=4 onkeypress = "return fun_AllowOnlyAmountAndDot(this.id);"> </td></tr><tr>
+ <td>   initialLayerSpeed </td><td><input type="text" name="initialLayerSpeed" value=200 onkeypress = "return fun_AllowOnlyAmountAndDot(this.id);"> </td></tr><tr>
+ <td>   printSpeed</td><td><input type="text" name="printSpeed" value=50 onkeypress = "return fun_AllowOnlyAmountAndDot(this.id);"> </td></tr><tr>
+ <td>   infillSpeed</td><td><input type="text" name="infillSpeed" value=50 onkeypress = "return fun_AllowOnlyAmountAndDot(this.id);"> </td></tr><tr>
+ <td>   moveSpeed</td><td><input type="text" name="moveSpeed" value=200 onkeypress = "return fun_AllowOnlyAmountAndDot(this.id);"> </td></tr><tr>
+ <td>   fanOnLayerNr</td><td><input type="text" name="fanOnLayerNr" value=2 onkeypress = "return fun_AllowOnlyAmountAndDot(this.id);"> </td></tr>
+</table>
+     </div>
+    </a>
+
+<a href="#Cura2" id="Cura2">
+        Cura2
+        <div>
+        <table width="70%" border="0">    
+ <td>   supportAngle</td><td><input type="text" name="supportAngle" value=-1 onkeypress = "return fun_AllowOnlyAmountAndDot(this.id);"> </td></tr><tr>
+ <td>   supportEverywhere</td><td><input type="text" name="supportEverywhere" value=0 onkeypress = "return fun_AllowOnlyAmountAndDot(this.id);"> </td></tr><tr>
+       
+ <td>   retractionAmount</td><td><input type="text" name="retractionAmount" value= 4.5 onkeypress = "return fun_AllowOnlyAmountAndDot(this.id);"></td></tr><tr>
+ <td>   retractionSpeed</td><td><input type="text" name="retractionSpeed" value= 45 onkeypress = "return fun_AllowOnlyAmountAndDot(this.id);"> </td></tr><tr>
+ <td>   retractionAmountExtruderSwitch</td><td><input type="text" name="retractionAmountExtruderSwitch" value=14.5 onkeypress = "return fun_AllowOnlyAmountAndDot(this.id);"> </td></tr><tr>
+ <td>   multiVolumeOverlap</td><td><input type="text" name="multiVolumeOverlap" value=0 onkeypress = "return fun_AllowOnlyAmountAndDot(this.id);"> </td></tr><tr>
+ <td>   objectPosition x</td><td><input type="text" name="objectPosition.X" value= 102500 onkeypress = "return fun_AllowOnlyAmountAndDot(this.id);">(um)</td></tr><tr>
+ <td>   objectPosition Y</td><td><input type="text" name="objectPosition.Y" value= 102500 onkeypress = "return fun_AllowOnlyAmountAndDot(this.id);">(um)</td></tr><tr>
+ <td>   objectSink</td><td><input type="text" name="objectSink" value= 0 onkeypress = "return fun_AllowOnlyAmountAndDot(this.id);"> </td></tr>
+</table>
+     </div>
+    </a>
+
+<a href="#Cura3" id="Cura3">
+        Cura3
+        <div>
+        <table width="70%" border="0">
+ <td>   raftMargin</td><td><input type="text" name="raftMargin" value=5000 onkeypress = "return fun_AllowOnlyAmountAndDot(this.id);"> </td></tr><tr>
+ <td>   raftLineSpacing</td><td><input type="text" name="raftLineSpacing" value=1000 onkeypress = "return fun_AllowOnlyAmountAndDot(this.id);"> </td></tr><tr>
+ <td>   raftBaseThickness</td><td><input type="text" name="raftBaseThickness" value=0 onkeypress = "return fun_AllowOnlyAmountAndDot(this.id);"> </td></tr><tr>
+ <td>   raftBaseLinewidth</td><td><input type="text" name="raftBaseLinewidth" value=0 onkeypress = "return fun_AllowOnlyAmountAndDot(this.id);"> </td></tr><tr>
+ <td>   raftInterfaceThickness</td><td><input type="text" name="raftInterfaceThickness" value=0 onkeypress = "return fun_AllowOnlyAmountAndDot(this.id);"> </td></tr><tr>
+ <td>   raftInterfaceLinewidth</td><td><input type="text" name="raftInterfaceLinewidth" value=0 onkeypress = "return fun_AllowOnlyAmountAndDot(this.id);"> </td></tr><tr>
+    
+ <td>   minimalLayerTime</td><td><input type="text" name="minimalLayerTime" value=5 onkeypress = "return fun_AllowOnlyAmountAndDot(this.id);"> </td></tr><tr>
+ <td>   minimalFeedrate</td><td><input type="text" name="minimalFeedrate" value=10 onkeypress = "return fun_AllowOnlyAmountAndDot(this.id);"> </td></tr><tr>
+ <td>   coolHeadLift</td><td><input type="text" name="coolHeadLift" value=1 onkeypress = "return fun_AllowOnlyAmountAndDot(this.id);"> </td></tr><tr>
+ <td>   fanSpeedMin</td><td><input type="text" name="fanSpeedMin" value=100 onkeypress = "return fun_AllowOnlyAmountAndDot(this.id);"> </td></tr><tr>
+ <td>   fanSpeedMax</td><td><input type="text" name="fanSpeedMax" value=100 onkeypress = "return fun_AllowOnlyAmountAndDot(this.id);"> </td></tr><tr>
+ <td>   fixHorrible</td><td><input type="text" name="fixHorrible" value=0 onkeypress = "return fun_AllowOnlyAmountAndDot(this.id);"> </td></tr><tr>
+
+</table>
+	</div>
+</a>
+</div>
+
+<p></p>
+<a href="#Main" > click here</a>
+</form>
+
+
+</body>
+</html>

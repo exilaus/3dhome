@@ -3,8 +3,8 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	  <title>3D Home</title>
- <link rel="stylesheet" type="text/css" href="./style.css">
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js"></script>
+ <link rel="stylesheet" type="text/css" href="./WEB/style.css">
+    <script type="text/javascript" src="./WEB/jquery.min.js"></script>
     <!--[if IE 7]>
     <style type="text/css">
         #vtab > ul > li.selected{
@@ -52,12 +52,48 @@ function hideall(){
 
 function fdprint(){
     document.getElementById('5dprint').style.visibility="visible";
+    document.getElementById('5dprint').innerHTML = '<iframe src="http://p'+window.location.hostname+'/#" style="border: 0; width: 100%; height: 100%;" seamless></iframe>';
+}
 
-    document.getElementById('5dprint').innerHTML = '<iframe src="http://www.makibox.com" style="border: 0; width: 100%; height: 100%;" seamless></iframe>';
-    for (var i=0;i<=100;i++)
-     { 
-      document.getElementById('5dprint').style.width= i+"%";
-     }
+function octoprint(){
+    document.getElementById('octoprint').style.visibility="visible";
+    document.getElementById('octoprint').innerHTML = '<iframe src="http://o'+window.location.hostname+'" style="border: 0; width: 100%; height: 100%;" seamless></iframe>';
+}
+
+function dav(){
+    document.getElementById('webdav').style.visibility="visible";
+    document.getElementById('webdav').innerHTML = '<iframe src="http://d'+window.location.hostname+'" style="border: 0; width: 100%; height: 100%;" seamless></iframe>';
+}
+
+function webcam(){
+    document.getElementById('webcam').style.visibility="visible";
+    document.getElementById('webcam').innerHTML = '<iframe src=/webcam/?action=stream" style="border: 0; width: 100%; height: 100%;" seamless></iframe>';
+}
+
+
+function slice(){
+    document.getElementById('slice').style.visibility="visible";
+    document.getElementById('slice').innerHTML = '<iframe src="slice.html#Main" style="border: 0; width: 100%; height: 100%;" seamless></iframe>';
+}
+
+function config(){
+    document.getElementById('config').style.visibility="visible";
+    document.getElementById('config').innerHTML = '<iframe src="./cgi-bin/config.cgi" style="border: 0; width: 100%; height: 100%;" seamless></iframe>';
+}
+
+function update(){
+    document.getElementById('update').style.visibility="visible";
+    document.getElementById('update').innerHTML = '<iframe src="./cgi-bin/update.py" style="border: 0; width: 100%; height: 100%;" seamless></iframe>';
+}
+
+function reboot(){
+    document.getElementById('reboot').style.visibility="visible";
+    document.getElementById('reboot').innerHTML = '<iframe src="./cgi-bin/reboot.py" style="border: 0; width: 100%; height: 100%;" seamless></iframe>';
+}
+
+function scan(){
+    document.getElementById('scan').style.visibility="visible";
+    document.getElementById('scan').innerHTML = '<iframe src="scan.html" style="border: 0; width: 100%; height: 100%;" seamless></iframe>';
 }
 //]]>  
 
@@ -66,7 +102,7 @@ function fdprint(){
 
 </head>
 <body>
-<h2>3d printer Home</h2>
+<h2>3D Home</h2>
     <div id="vtab">
         <ul>
             <li class="home selected"></li>
@@ -77,14 +113,13 @@ function fdprint(){
          <table align="center">
 		 <tr>
          <td align="center"><h3>Netfabb Cloud</h3>     <a href="http://cloud.netfabb.com/" target="_blank"><img src="./img/netfabb.png"></a></td>
-         <td align="center"><h3>Coffeescad</h3>        <a href="http://coffeescad.net/online/" target="_blank"><img src="./img/coffescad.png"/></a></td>
+         <td align="center"><h3>Tinkercad</h3>         <a href="https://tinkercad.com/" target="_blank"><img src="./img/tinkercad.png"></a></td>
          <td align="center"><h3>Shapesmith</h3>        <a href="https://cloud.shapesmith.net/signin" target="_blank"><img src="./img/smith.png"/></a></td>
          <td align="center"><h3>Tin3d</h3>             <a href="http://www.3dtin.com/#" target="_blank"><img src="./img/3dtin.png"></a></td>
          </tr>
 		 <tr>
          <td align="center"><h3>Leopoly</h3>           <a href="http://leopoly.com/" target="_blank"><img src="./img/leopoly.png"></a></td>
          <td align="center"><h3>Cookiecaster</h3>      <a href="http://cookiecaster.com/#editor" target="_blank"><img src="./img/Cookiecaster.jpg"></a></td>
-		 <td align="center"><h3>Tinkercad</h3>         <a href="https://tinkercad.com/" target="_blank"><img src="./img/tinkercad.png"></a></td>
          </tr>
 		 </table>
         
@@ -93,28 +128,39 @@ function fdprint(){
          <table align="center">
 		 <tr>
          <td align="center"><h3>5dprint</h3>           <a href="#" onClick="fdprint()"><img src="./img/makible.png" /></a></td>
-		 <td align="center"><h3>Slice</h3>		       <img src="./img/slice.png"/></td>
-		 <td align="center"><h3>Shapextractor</h3>     <img src="./img/scan.png"/></td>
-         <td align="center"><h3>Webcam</h3>            <img src="./img/webcam.png"/></td>
+	  <td align="center"><h3>Slice</h3>	      <a href="#" onClick="slice()"><img src="./img/slice.png"/></a></td>
+  	  <td align="center"><h3>Shapextractor</h3>     <a href="#" onClick="scan()"><img src="./img/scan.png"/></a></td>
+         <td align="center"><h3>Coffeescad</h3>        <a href="./coffeescad/" target="_blank"><img src="./img/coffescad.png"/></a></td>
          </tr>
 		 <tr>
-         <td align="center"><h3>Octoprint</h3>         <img src="./img/octoprint.png"/></td>
-         <td align="center"><h3>owncloud</h3>          <img src="./img/owncloud.png"/></td>
+         <td align="center"><h3>Octoprint</h3>         <a href="#" onClick="octoprint()"><img src="./img/octoprint.png" /></a></td>
+         <td align="center"><h3>Easy DAV</h3>          <a href="#" onClick="dav()"><img src="./img/owncloud.png"/></a></td>
+         <td align="center"><h3>Webcam</h3>            <a href="#" onClick="webcam()"><img src="./img/webcam.png"/></a></td>
+        
          </tr>
 		 </table>
 		</div>
         <div>
          <table align="center">
 		 <tr>
-         <td align="center"><h3>Upgrade</h3>            <img src="./img/down.png" /></td>
-		 <td align="center"><h3>Configuration</h3>		<img src="./img/conf.png"/></td>
+         <td align="center"><h3>Upgrade</h3>           <a href="#" onClick="update()"><img src="./img/down.png" /></a></td>
+	  <td align="center"><h3>Configuration</h3>     <a href="#" onClick="config()"><img src="./img/conf.png"/></a></td>
+	  <td align="center"><h3>Reboot</h3>	      <a href="#" onClick="reboot()"><img src="./img/reboot.png"/></a></td>
          </tr>
 		 </table>
 	    </div>
     </div>
 <div id="5dprint" style="height:100%; width:100%; position:fixed; left:0; top:0; z-index:30;visibility:hidden;">contenaaat here</div>
-<div id="hiddens" style="float: right;z-index: 100; position: absolute; right: 0; top: 35%;"><center>
-           <a href="" onClick="hideall()"><img src="./img/home.png" /><br>
+<div id="octoprint" style="height:100%; width:100%; position:fixed; left:0; top:0; z-index:30;visibility:hidden;">contenaaat here</div>
+<div id="webdav" style="background-color:#ffffff;height:100%; width:100%; position:fixed; left:0; top:0; z-index:30;visibility:hidden;">contenaaat here</div>
+<div id="config" style="height:100%; width:100%; position:fixed; left:0; top:0; z-index:30;visibility:hidden;">contenaaat here</div>
+<div id="update" style="height:100%; width:100%; position:fixed; left:0; top:0; z-index:30;visibility:hidden;">contenaaat here</div>
+<div id="reboot" style="height:100%; width:100%; position:fixed; left:0; top:0; z-index:30;visibility:hidden;">contenaaat here</div>
+<div id="scan" style="height:100%; width:100%; position:fixed; left:0; top:0; z-index:30;visibility:hidden;">contenaaat here</div>
+<div id="slice" style="height:100%; width:100%; position:fixed; left:0; top:0; z-index:30;visibility:hidden;">contenaaat here</div>
+<div id="webcam" style="height:100%; width:100%; position:fixed;background-color:white; left:0; top:0; z-index:30;visibility:hidden;">contenaaat here</div>
+<div id="sysmon" style="height:200px; width:200px; float: left;z-index: 2; position: absolute; left: 0; top: 35%;"><iframe src="./cgi-bin/sysmon.cgi" style="border: 0; width: 100%; height: 100%;" seamless></iframe></div>
+<div id="hiddens" style="float: right;z-index: 100; position: absolute; right: 0; top: 35%;"><center><a href="" onClick="hideall()"><img src="./img/home.png" /><br></center></div>
 
-</center></div></body>
+</body>
 </html>

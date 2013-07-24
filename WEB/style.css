@@ -146,13 +146,19 @@ table{
             filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=30);
         }
         #vtab > ul > li.home {
-            background: url('./img/link.png') no-repeat center center;
+            background: url('/img/link.png') no-repeat center center;
         }
         #vtab > ul > li.login {
-            background: url('./img/unlink.png') no-repeat center center;
+            background: url('/img/unlink.png') no-repeat center center;
         }
         #vtab > ul > li.support {
-            background: url('./img/info.png') no-repeat center center;
+            background: url('/img/info.png') no-repeat center center;
+        }
+        #vtab > ul > li.flag {
+            background: url('/img/flag.png') no-repeat center center;
+        }
+        #vtab > ul > li.trunk {
+            background: url('/img/trunk.png') no-repeat center center;
         }
         #vtab > ul > li.selected {
             opacity: 1;
